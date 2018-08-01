@@ -10,7 +10,7 @@
 // @include      *
 // @grant        GM_addStyle
 // @grant        GM_xmlhttpRequest
-// @license      GNU GPLv3
+// @license      GPL-3.0
 // ==/UserScript==
 
 (function () {
