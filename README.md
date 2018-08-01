@@ -6,10 +6,10 @@ Add a list of login accounts from BugMeNot ( [bugmenot.com](http://bugmenot.com/
 - Click the username input.
 - A list of accounts to login from BugMeNot will appear:
 
-![image](https://greasyfork.org/system/screenshots/screenshots/000/009/216/original/list-bugnotme.jpg)
+![image](https://greasyfork.org/system/screenshots/screenshots/000/011/869/original/bugmenot-anywhere.png)
 - Select the account you want and the script will automatically fill in your username and password.
 
-![image](https://greasyfork.org/system/screenshots/screenshots/000/009/217/original/auto-fill.jpg)
+![image](https://greasyfork.org/system/screenshots/screenshots/000/011/870/original/bugmenot-anywhere-selected.png)
 
 # Mirrors
 - [GitHub](https://github.com/tam710562/BugMeNot-Everywhere)
