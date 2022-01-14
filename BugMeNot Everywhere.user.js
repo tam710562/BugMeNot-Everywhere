@@ -3,18 +3,25 @@
 // @namespace    https://greasyfork.org/users/37096/
 // @homepage     https://greasyfork.org/scripts/35957/
 // @supportURL   https://greasyfork.org/scripts/35957/feedback
-// @version      1.1.0
+// @version      1.1.1
 // @description  Add a list of login accounts from BugMeNot ( bugmenot.com ) on any website when focusing on username input
 // @author       Hồng Minh Tâm
 // @icon         http://bugmenot.com/favicon.ico
 // @include      *
+// @connect      bugmenot.com
 // @grant        GM_addStyle
 // @grant        GM_xmlhttpRequest
-// @license      GPL-3.0
+// @license      GNU GPLv3
 // ==/UserScript==
 
 (function () {
   'use strict';
+
+  const icons = {
+    username: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 172 172"><path fill="currentColor" d="M114.66667,50.16667c0,15.83216 -12.8345,28.66667 -28.66667,28.66667c-15.83216,0 -28.66667,-12.8345 -28.66667,-28.66667c0,-15.83216 12.8345,-28.66667 28.66667,-28.66667c15.83216,0 28.66667,12.8345 28.66667,28.66667zM86,114.66667c9.374,0 17.62608,-4.56102 22.85775,-11.51986c20.1885,4.472 41.64225,14.27902 41.64225,29.43652v17.91667h-129v-17.91667c0,-15.1575 21.45375,-24.96452 41.64225,-29.43652c5.23167,6.95883 13.48375,11.51986 22.85775,11.51986z"></path></svg>',
+    password: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 172 172"><path fill="currentColor" d="M50.16667,35.83333c-27.70633,0 -50.16667,22.46033 -50.16667,50.16667c0,27.70633 22.46033,50.16667 50.16667,50.16667c22.72313,0 41.89756,-15.11458 48.06706,-35.83333h30.76628v21.5h28.66667v-21.5h14.33333v-28.66667h-73.76628c-6.1695,-20.71875 -25.34393,-35.83333 -48.06706,-35.83333zM50.16667,64.5c11.87517,0 21.5,9.62483 21.5,21.5c0,11.87517 -9.62483,21.5 -21.5,21.5c-11.87517,0 -21.5,-9.62483 -21.5,-21.5c0,-11.87517 9.62483,-21.5 21.5,-21.5z"></path></svg>',
+  }
+
   GM_addStyle([
     '.bmn-list { display:none; list-style: none; border: 1px solid #ccc; padding: 0; margin: 0; background-color: #fff; position: fixed; cursor: default; z-index: 9999999999; box-sizing: border-box; overflow: auto; text-align: left; }',
     '.bmn-list.show { display:block; }',
@@ -29,7 +36,7 @@
     '.bmn-list .bmn-item:last-child { border-bottom: 0; }',
     '.bmn-list .bmn-item:hover { background-color: #f8f9fa; }',
     '.bmn-list .bmn-item:before { position: absolute; content: ""; width: 5px; top: 0; left: 0; bottom: 0; background-color: #f7704f; }',
-    '.bmn-list .bmn-item .bmn-icon { padding: 5px; background-color: #e9ecef; border: 1px solid #ced4da; }',
+    '.bmn-list .bmn-item .bmn-icon { width: 32px; height: 32px; padding: 5px; background-color: #e9ecef; border: 1px solid #ced4da; }',
     '.bmn-list .bmn-item .bmn-username { margin-left: 10px; font-weight: 700; }',
     '.bmn-list .bmn-item .bmn-password { margin-left: 10px; color: #666; }',
     '.bmn-list .bmn-item .bmn-success { display: inline-block; font-weight: 700; }',
@@ -93,10 +100,6 @@
     };
   }
 
-  function getIcons8(style, id, size, color) {
-    return 'https://png.icons8.com/' + style + '/' + size + '/' + color + '/' + id + '.png';
-  }
-
   var accounts = [];
   var inputUsernameCurrentEl, inputPasswordCurrentEl;
   var minHeightListBMN = 100;
@@ -125,7 +128,7 @@
       }
       init();
     },
-    onerror: function (response) {}
+    onerror: function (response) { }
   });
 
   function init() {
@@ -150,11 +153,11 @@
           '<div class="bmn-row">',
           '  <div class="bmn-col bmn-full">',
           '    <div class="bmn-row bmn-align-items-center">',
-          '      <img class="bmn-icon" src="' + getIcons8('material', 'user', 20, '495057') + '" />',
+          '      <div class="bmn-icon">' + icons.username + '</div>',
           '      <span class="bmn-username">' + account.username + '</span>',
           '    </div>',
           '    <div class="bmn-row bmn-align-items-center">',
-          '      <img class="bmn-icon" src="' + getIcons8('material', 'password1', 20, '495057') + '" />',
+          '      <div class="bmn-icon">' + icons.password + '</div>',
           '      <span class="bmn-password">' + account.password + '</span>',
           '    </div>',
           '  </div>',
